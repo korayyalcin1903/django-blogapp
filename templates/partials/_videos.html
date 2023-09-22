@@ -1,0 +1,6 @@
+<div class="col-3 d-none d-sm-none d-md-block">
+    <h3>İlginizi Çekebilecek Videolar</h3>
+    {% for video in videos %}
+    <iframe src="https://www.youtube.com/embed/{{video.video_link}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    {% endfor %}
+</div>

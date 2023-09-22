@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load static %}
+
+    {% block content %}
+    <div class="container my-3">
+        <div class="row">
+            <div class="col-12 col-sm-9 col-md-9">
+                <h3>Blogs</h3>
+                <hr>
+                <div class="row">
+                    {% if blogs %}
+                        {% for blog in blogs %}
+                            {% include "blog/partials/_blog.html" %}
+                        {% endfor %}
+                    {% else %}
+                        <div class="alert alert-danger">
+                            Blog is not found...
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-12 col-sm-3 col-md-3">
+                {% include "partials/_videos.html" %}
+            </div>
+        </div>
+    </div>
+    {% endblock  %}
+
+

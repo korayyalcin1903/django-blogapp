@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{blog.title}}{% endblock  %}
+
+    {% block content %}
+        <div class="container my-3">
+            <div class="row">
+                <div class="col-12 col-sm-3 col-md-3 order-2 order-sm-1 order-md-1">
+                    {% if comments %}
+                        <h3>Comments</h3>
+                        <hr>
+                        {% for comment in comments %}
+                            <div class="card my-1 py-1">
+                                <div class="row">
+                                    <div class="col-2 d-flex justify-content-center">
+                                        <img src="{% static "img/profile.png" %}" style="width:2rem;height:2rem;" class="mx-2" alt="">
+                                    </div>
+                                    <div class="col-10">
+                                        <div class="d-flex align-items-center">
+                                            <h5>{{comment.full_name}} </h5><small> - {{comment.date|date:"D d M Y"}}</small>
+                                        </div>
+                                        <div><p>{{comment.text}}</p></div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                    {% for blog in lastest_blogs %}
+                        {% include "blog/partials/_latest_blog.html" %}
+                    {% endfor %}
+                    {% endif %}
+                </div>
+                <div class="col-12 col-sm-6 col-md-6 order-1 order-sm-2 order-md-2">
+                    <h3 class="title">{{blog.title}}</h3>
+                    <hr>
+                    <img src="{{blog.image.url}}" class="img w-100" alt="">
+                    <p class="text">{{blog.description|safe}}</p>
+                    <hr>
+                    <h3>Leave a comment</h3>
+                    <form action="{% url "blog_details" blog.slug %}" method="POST" class="mb-3">
+                        {% csrf_token %}
+                        {% for error in form.non_field_errors %}
+                            <div class="alert alert-warning">{{error}}</div>
+                        {% endfor %}
+                        {% for field in comment_form %}
+                        <div class="mb-3">
+                            <label for="field_id_for_label">{{field.label}}</label>
+                            {{field}}
+                        </div>
+                        {% endfor %}
+                        <button type="submit" class="btn btn-outline-success">Submit</button>
+                    </form>
+                </div>
+                <div class="col-12 col-sm-3 col-md-3 order-3 order-sm-3 order-md-3">
+                    {% include "partials/_videos.html" %}
+                </div>
+            </div>
+        </div>
+    {% endblock  %}
+
+

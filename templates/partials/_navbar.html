@@ -1,0 +1,104 @@
+{% load static %}
+<nav class="navbar navbar-expand-lg bg-body-tertiary navbar-background">
+    <div class="container">
+        <a class="navbar-brand" href="{% url "home" %}"><img src="{% static 'img/tekno.png' %}" style="width:6rem;" alt=""></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            {% if user.is_authenticated %}
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{% url "home" %}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url "blogs" %}">Blogs</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Categories
+                        </a>
+
+                        <ul class="dropdown-menu">
+                            {% for category in categories %}
+                                {% if not category.parent %}
+                                    <div class="category-link list-group">
+                                        {% if category.slug == selected_category or category.slug == selected_parent%}
+                                            <a class="list-group-item list-group-item-action category-active border border-0" href="{% url 'blogs_by_category' category.slug %}">{{category.name|title}}</a>
+                                        {% else %}
+                                            <a class="list-group-item list-group-item-action border border-0" href="{% url 'blogs_by_category' category.slug %}">{{category.name|title}}</a>
+                                        {% endif %}
+                                        <div class="children list-group">
+                                            {% for child_category in category.children.all %}
+                                                <a href="{% url 'child_by_category' category.slug child_category.slug %}" class="children-list list-group-item list-group-item-action border border-0"><p>{{child_category.name}}</p></a>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                        
+                        
+                        
+                    </li>
+                </ul>
+                <form class="d-flex w-50" role="search" action="{% url "blog_search" %}" method="GET">
+                    <input class="form-control me-2 bg-transparent" type="search" name="q" id="search-box" placeholder="Search"
+                    aria-label="Search">
+                    <button class="btn btn-dark" type="submit"><i class="bi bi-search"></i></button>
+                </form>
+            {% endif %}
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                {% if user.is_authenticated %}
+                    <li class="nav-item"> 
+                        <button type="button" class="btn" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="bottom" data-bs-html="true" data-bs-content='
+                        <div class="list-group">
+                            <a href="{% url 'profile' %}" class="list-group-item list-group-item-action" aria-current="true">
+                                <i class="bi bi-person-lines-fill"></i> Profile
+                            </a>
+                            <a href="{% url 'change_password' %}" class="list-group-item list-group-item-action"> <i class="bi bi-key"></i> Change Password</a>
+                            <a href="{% url 'logout' %}" class="list-group-item list-group-item-action"> <i class="bi bi-box-arrow-right"></i> Logout </a>
+                            <a href="admin" class="list-group-item list-group-item-action"> <i class="bi bi-gear"></i> Settings </a>
+                          </div>
+                        '>
+                        <p class="d-inline">Welcome, {{user.first_name}}</p> 
+                        {% if user.profile.avatar%}
+                            <img src="{{user.profile.avatar.url}}" class="rounded-circle" style="width:2rem;height:2rem;" alt="">
+                        {% else %}
+                            <img src="{% static 'img/profile.png' %}" class="rounded-circle" style="width:2rem;height:2rem;" alt="">
+                        {% endif %}
+                          </button>
+                        
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a href="{% url 'login' %}" class="nav-link">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'register' %}" class="nav-link">Register</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<script>
+    const search = document.querySelector("#search-box")
+
+    search.addEventListener("click", () => {
+        search.classList.remove("bg-transparent")
+    })
+
+    document.addEventListener("click", (event) => {
+        if (!search.contains(event.target)) {
+            search.classList.add("bg-transparent")
+        }
+    })
+
+    $(document).ready(function () {
+        $('[data-bs-toggle="popover"]').popover();
+      });
+</script>

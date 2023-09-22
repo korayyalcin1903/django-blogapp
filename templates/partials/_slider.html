@@ -1,0 +1,23 @@
+<div id="carouselExampleRide" class="carousel slide mb-3 d-none d-sm-block d-md-block" data-bs-ride="carousel">
+    <div class="carousel-inner">
+        {% for blog in blogs|slice:"3" %}
+            <a href="{% url 'blog_details' blog.slug %}">
+                <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                    <img src="{{blog.image.url}}" class="d-block w-100 rounded" alt="...">
+                    <div class="carousel-caption d-none d-md-block text-light">
+                        <h5>{{blog.title}}</h5>
+                        <p>{{blog.description|slice:'0:100'|striptags|safe}}</p>
+                    </div>
+                </div>
+            </a>
+        {% endfor %}
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleRide" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleRide" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>

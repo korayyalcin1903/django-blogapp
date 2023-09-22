@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container">
+        {% for field in form %}
+        <div class="mb-3">
+            <label for="field_id_for_label">{{field.label}}</label>
+            {{field}}
+        </div>
+        {% endfor %}
+    </div>
+{% endblock  %}

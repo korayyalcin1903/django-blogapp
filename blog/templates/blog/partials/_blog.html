@@ -1,0 +1,22 @@
+{% load static %}
+
+<div class="card mb-3 border border-0">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <a href="{% url 'blog_details' blog.slug %}"><img src="{{blog.image.url}}" class="img-fluid rounded image" alt="..."></a>
+    </div>
+    <div class="col-md-8">
+      <div class="card-body pt-2 pt-sm-0 pt-md-0">
+        <i class="bi bi-{{blog.categories.all|length}}-circle-fill"></i>
+        {% for category in blog.categories.all %}
+          <a href="{% url 'blogs_by_category' category.slug %}" class="link-underline link-underline-opacity-0 text-success">{{category}}</a>
+          {% if not forloop.last %} - {% endif %}
+        {% endfor %}
+        <a href="{% url 'blog_details' blog.slug %}" class="link-underline link-underline-opacity-0 nav-link"><h5 class="card-title">{{blog.title|slice:'0:70'|add:"..."}}</h5></a>
+        <p class="card-text">{{blog.description|slice:'0:100'|add:'...'|striptags|safe}}</p>
+        <p>{{comment_count}}</p>
+        <p class="card-text"><small class="text-body-secondary">{{blog.date|date:"D d M Y"}} {{blog.date|time:"H:i"}}</small></p>
+      </div>
+    </div>
+  </div>
+</div>
