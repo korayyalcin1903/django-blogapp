@@ -83,6 +83,8 @@ Proje ile ilgili sorularınız veya geri bildirimleriniz için aşağıdaki ilet
 ![127 0 0 1_8000_ (1) (Orta)](https://github.com/korayyalcin1903/django-blogapp/assets/92126235/fbe90472-d288-4028-b320-6387a1ea5e86)
 ### Blogs
 ![127 0 0 1_8000_blogs (Orta)](https://github.com/korayyalcin1903/django-blogapp/assets/92126235/29c470cd-b53b-489c-8e70-36515a93b34e)
+### Blog Details and Comment
+![127 0 0 1_8000_blogs_abd-ordusu-ve-microsoft-arasndaki-anlasma-buyuyor (Orta)](https://github.com/korayyalcin1903/django-blogapp/assets/92126235/98101872-5d70-4921-8346-c27d2c962af1)
 ### Account/Profile
 ![127 0 0 1_8000_account_profile (Orta)](https://github.com/korayyalcin1903/django-blogapp/assets/92126235/dc6f7d19-0ad2-4527-8f50-bdc21dede6b0)
 
