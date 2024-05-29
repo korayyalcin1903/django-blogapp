@@ -10,7 +10,7 @@ Projeyi yerel bir ortamda başlatmak için aşağıdaki adımları izleyin:
 
 Projeyi başlatmak için aşağıdaki gereksinimlere ihtiyacınız vardır:
 
-- Python 3.x
+- Python 3
 - Django
 - Diğer bağımlılıklar (requirements.txt)
 
